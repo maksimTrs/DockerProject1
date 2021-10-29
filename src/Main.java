@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         for (int i = 0; i < 3; i++) {
-            System.out.println("Hello, Docker World!!");
+            System.out.println("Hello, Docker World!");
         }
         System.out.println("\nDocker project was started successfully!!!");
     }
