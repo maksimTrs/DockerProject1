@@ -1,0 +1,25 @@
+pipeline {
+      environment {
+     registry = "roronoazorroippo/hello-world2"
+     registryCredential = 'dockerhub'
+  }
+  agent any
+  stages {
+    stage('Cloning Docker Image') {
+      steps {
+       bat 'docker pull roronoazorroippo/hello-world2:latest'
+      }
+    }
+    stage('Run Container') {
+      steps{
+       bat 'docker run --name hellworld2 --rm roronoazorroippo/hello-world2'
+      }
+    }
+     stage('Reports Generation') {
+         steps {
+        allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
+        emailext attachLog: true, body: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!<br>Visit ${BUILD_URL} URL  to observe more details', subject: 'Pipeline Build [Pipeline1 for Projects] was finished', to: 'roronoazorroippo@gmail.com'
+     }
+     }
+  }
+}
